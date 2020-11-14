@@ -1,1 +1,11 @@
-<h1>asdas</h1>
+{% extends 'news/base.html' %}
+
+{% block title %}
+	New_News 
+{% endblock %}
+
+{% block menu %}
+	{% for item in news %}
+		{{ item.title }}<br>
+	{% endfor %}
+{% endblock %}

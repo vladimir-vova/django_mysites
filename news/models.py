@@ -8,3 +8,6 @@ class News(models.Model):
     updated_ad = models.DateTimeField(auto_now=True)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
     is_published = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return self.title
