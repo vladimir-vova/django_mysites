@@ -1,7 +1,7 @@
 {% extends 'news/base.html' %}
 
 {% block title %}
-	News 
+	{{ category.title }}
 {% endblock %}
 
 {% block menu %}
@@ -19,11 +19,11 @@
 	  </div>
 	</nav>
 	<div class="container mt-3">
-		<h1>News</h1>
+		<h1>{{ category.title }}</h1>
 		<div class="row">
 			<div class="col-md-3">
 				<ul class="list-group">
-					{% for item in category %}
+					{% for item in categories %}
 						<a href="/category/{{ item.pk }}" class="list-group-item list-group-item-action">{{ item.title }}</a>
 					{% endfor %}
 				</ul>

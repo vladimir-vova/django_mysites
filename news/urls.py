@@ -5,4 +5,5 @@ app_name = "news"
 
 urlpatterns = [
     path('', index, name="index"),
+    path('category/<int:category_id>/', get_category, name="category"),
 ]
