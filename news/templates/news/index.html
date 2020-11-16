@@ -1,11 +1,49 @@
 {% extends 'news/base.html' %}
 
 {% block title %}
-	New_News 
+	News 
 {% endblock %}
 
 {% block menu %}
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="/">Navbar</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+		  <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+		  <li class="nav-item"><a class="nav-link" href="#">Добавить новость</a></li>
+		</ul>
+	  </div>
+	</nav>
+	<div class="container mt-3">
+		<h1>News</h1>
+		<div class="row">
+			<div class="col-md-12">
+				{% for item in news %}
+					<div class="card mb-3">
+					  <div class="card-header">
+						Категория: {{ item.category }}
+					  </div>
+					  <div class="card-body">
+						<h5 class="card-title">{{ item.title }}</h5>
+						<p class="card-text">{{ item.content }}</p>
+						<a href="#" class="btn btn-primary">Read more...</a>
+					  </div>
+					  <div class="card-footer text-muted">
+						{{ item.created_ad|date:"Y-m-d H:i:s" }}
+					  </div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	{% comment %}
 	{% for item in news %}
-		{{ item.title }}<br>
+		{{ item.title }}
 	{% endfor %}
+	{% endcomment %}
 {% endblock %}
