@@ -23,7 +23,7 @@
 					<div class="media-body">
 						<h5 class="card-title">{{ item.title }}</h5>
 						<p class="card-text">{{ item.content|linebreaks|truncatewords:50 }}</p>
-						<a href="#" class="btn btn-primary">Read more...</a>
+						<a href="{% url 'news:view_news' item.pk %}" class="btn btn-primary">Read more...</a>
 					</div>
 				</div>
 			</div>

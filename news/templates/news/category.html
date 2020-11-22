@@ -12,7 +12,7 @@
 	{% for item in news %}
 		<div class="card mb-3">
 			<div class="card-header">
-				Категория: {{ item.category }}
+				Категория: <a href="{% url 'news:category' item.category.pk %}">{{ item.category }}</a>
 			</div>
 			<div class="card-body">
 				<div class="media">
@@ -22,7 +22,7 @@
 					<div class="media-body">
 						<h5 class="card-title">{{ item.title }}</h5>
 						<p class="card-text">{{ item.content|linebreaks|truncatewords:50 }}</p>
-						<a href="#" class="btn btn-primary">Read more...</a>
+						<a href="{% url 'news:view_news' item.pk %}" class="btn btn-primary">Read more...</a>
 					</div>
 				</div>
 			</div>
