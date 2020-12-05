@@ -8,6 +8,10 @@ class NewsAdmin(admin.ModelAdmin):
     search_fields = ('title','content')
     list_editable = ('is_published',)
     list_filter = ('title','is_published')
+    fields = ('title','category','content','photo','is_published','views',
+        'created_ad','updated_ad')
+    readonly_fields = ('views','created_ad','updated_ad')
+    save_on_top = True
     
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id','title')
