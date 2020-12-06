@@ -10,6 +10,10 @@ from .utils import MyMixin
 
 def test(request):
     objects = ['join1','join2','join3','join4',
+    'join5','join6','join7','join8','join9',
+    'join5','join6','join7','join8','join9',
+    'join5','join6','join7','join8','join9',
+    'join5','join6','join7','join8','join9',
     'join5','join6','join7','join8','join9']
 
     paginator = Paginator(objects, 2)
