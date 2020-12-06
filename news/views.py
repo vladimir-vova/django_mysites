@@ -27,6 +27,7 @@ class HomeNews(MyMixin, ListView):
     template_name = 'news/index.html'
     context_object_name = 'news'
     mixin_prop = 'Hello, world!!!'
+    paginate_by = 2
     
     def get_queryset(self):
         return News.objects.filter(is_published=True).select_related('category')
@@ -44,6 +45,7 @@ class NewsByCategory(MyMixin, ListView):
     template_name = 'news/category.html'
     context_object_name = 'news'
     allow_empty = False
+    paginate_by = 2
     
     def get_queryset(self):
         return News.objects.filter(category_id=self.kwargs['category_id'], is_published=True).select_related('category')

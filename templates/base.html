@@ -22,17 +22,36 @@
 				<div class="col-md-9">
 					{% block content %}{% endblock %}
 
+					{% if page_obj.has_other_pages %}
 					<nav aria-label="...">
 					  	<ul class="pagination">
+					  		{% if page_obj.has_previous %}
+				  				<li class="page-item active">
+							    		<a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+							    	</li>	
+							{% endif %}
 					  		{% for p in page_obj.paginator.page_range %}
-						  		{% if page_obj.number|add:-1 <= p and page_obj.number|add:1 >= p %}
-						    	<li class="page-item">
-						    		<a class="page-link" href="?page={{ p }}">{{ p }}</a>
-						    	</li>
+
+						  		{% if page_obj.number|add:-2 <= p and page_obj.number|add:2 >= p %}
+						  			{% if page_obj.number == p %}
+								    	<li class="page-item active">
+								    		<a class="page-link" href="?page={{ p }}">{{ p }}</a>
+								    	</li>	
+						    		{% else %}
+						    			<li class="page-item">
+						    				<a class="page-link" href="?page={{ p }}">{{ p }}</a>
+						    			</li>	
+						    		{% endif %}
 						    	{% endif %}
 					    	{% endfor %}
+					    	{% if page_obj.has_next %}
+				  				<li class="page-item active">
+							    		<a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+							    	</li>	
+							{% endif %}
 					  	</ul>
 					</nav>
+					{% endif %}
 				</div>
 			</div>
 		</div>
