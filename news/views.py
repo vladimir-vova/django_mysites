@@ -1,14 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import News, Category
 from .forms import NewsForm
+from .utils import MyMixin
 
-class HomeNews(ListView):
+class HomeNews(MyMixin, ListView):
     model = News #аналог news = News.objects.all()
     template_name = 'news/index.html'
     context_object_name = 'news'
+    mixin_prop = 'Hello, world!!!'
     
     def get_queryset(self):
         return News.objects.filter(is_published=True).select_related('category')
@@ -21,7 +24,7 @@ class HomeNews(ListView):
 #    }
 #    return render(request,'news/index.html',args)
 
-class NewsByCategory(ListView):
+class NewsByCategory(MyMixin, ListView):
     model = News
     template_name = 'news/category.html'
     context_object_name = 'news'
@@ -55,10 +58,11 @@ class ViewNews(DetailView):
 #    }
 #    return render(request,'news/view_news.html', args)
 
-class CreateNews(CreateView):
+class CreateNews(LoginRequiredMixin, CreateView):
     form_class = NewsForm
     template_name = 'news/add_news.html'
     success_url = reverse_lazy('news:index')
+    login_url = reverse_lazy('news:index')
     
     
     
