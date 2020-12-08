@@ -5,21 +5,42 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 
 from .models import News, Category
-from .forms import NewsForm
+from .forms import NewsForm, UserRegisterForm
 from .utils import MyMixin
+from django.contrib import messages
 
-def test(request):
-    objects = ['join1','join2','join3','join4',
-    'join5','join6','join7','join8','join9',
-    'join5','join6','join7','join8','join9',
-    'join5','join6','join7','join8','join9',
-    'join5','join6','join7','join8','join9',
-    'join5','join6','join7','join8','join9']
 
-    paginator = Paginator(objects, 2)
-    page_num = request.GET.get('page', 1)
-    page_obj = paginator.get_page(page_num)
-    return render(request, 'news/test.html',{'page_obj':page_obj})
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Вы успешно зарегистировались.')
+            return redirect('news:login')
+        else:
+            messages.error(request, 'Ошибка регистрации.')
+    else:
+        form = UserRegisterForm()
+    aggr = {
+        'form' : form,
+    }
+    return render(request, 'news/register.html', aggr)
+
+def login(request):
+    return render(request, 'news/login.html')
+
+# def test(request):
+#     objects = ['join1','join2','join3','join4',
+#     'join5','join6','join7','join8','join9',
+#     'join5','join6','join7','join8','join9',
+#     'join5','join6','join7','join8','join9',
+#     'join5','join6','join7','join8','join9',
+#     'join5','join6','join7','join8','join9']
+
+#     paginator = Paginator(objects, 2)
+#     page_num = request.GET.get('page', 1)
+#     page_obj = paginator.get_page(page_num)
+#     return render(request, 'news/test.html',{'page_obj':page_obj})
 
 
 class HomeNews(MyMixin, ListView):

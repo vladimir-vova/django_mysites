@@ -11,5 +11,9 @@
 			<li class="nav-item"><a class="nav-link" href="{% url 'news:add_news' %}">Добавить новость</a></li>
 			{% endif %}
 		</ul>
+		<span class="navbar-text">
+	      	<a href="{% url 'news:register' %}">Регистрация</a> |
+	      	<a href="{% url 'news:login' %}">Авторазация</a>
+	    </span>
 	</div>
 </nav>
