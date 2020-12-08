@@ -137,3 +137,10 @@ MEDIA_URL = '/media/'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+EMAIL_HOST ='smtp.yandex.ru'
+EMAIL_PORT = 465 #2525
+EMAIL_HOST_USER = 'baimieff.volodya1@yandex.ru'
+EMAIL_HOST_PASSWORD = '!1iamzeniy'
+EMAIL_USER_TLS = False
+EMAIL_USE_SSL = True
