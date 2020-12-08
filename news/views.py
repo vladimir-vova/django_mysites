@@ -5,18 +5,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 
 from .models import News, Category
-from .forms import NewsForm, UserRegisterForm
+from .forms import NewsForm, UserRegisterForm, UserLoginForm
 from .utils import MyMixin
 from django.contrib import messages
+from django.contrib.auth import login, logout
 
 
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             messages.success(request, 'Вы успешно зарегистировались.')
-            return redirect('news:login')
+            return redirect('news:index')
         else:
             messages.error(request, 'Ошибка регистрации.')
     else:
@@ -26,8 +28,23 @@ def register(request):
     }
     return render(request, 'news/register.html', aggr)
 
-def login(request):
-    return render(request, 'news/login.html')
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('news:index')
+    else:
+        form = UserLoginForm()
+    aggr = {
+        'form' : form,
+    }
+    return render(request, 'news/login.html', aggr)
+
+def user_logout(request):
+    logout(request)
+    return redirect('news:login')
 
 # def test(request):
 #     objects = ['join1','join2','join3','join4',
