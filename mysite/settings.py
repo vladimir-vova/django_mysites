@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'ckeditor',
+    'ckeditor_uploader',
     'news.apps.NewsConfig',
     'debug_toolbar',
     'django.contrib.admin',
@@ -144,3 +146,5 @@ EMAIL_HOST_USER = 'baimieff.volodya1@yandex.ru'
 EMAIL_HOST_PASSWORD = '!1iamzeniy'
 EMAIL_USER_TLS = False
 EMAIL_USE_SSL = True
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

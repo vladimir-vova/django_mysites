@@ -19,7 +19,7 @@
 				<img src="{{ news_item.photo.url }}" alt="" class="float-left mr-3">
 			{% endif %}
 			<h5 class="card-title">{{ news_item.title }}</h5>
-			<p class="card-text">{{ news_item.content|linebreaks }}</p>
+			<p class="card-text">{{ news_item.content|safe|linebreaks }}</p>
 		</div>
 		<div class="card-footer text-muted">
 			{{ news_item.created_ad|date:"Y-m-d H:i:s" }}
